@@ -12,7 +12,7 @@
     let get_multi_char_delims(str : string) =         
         let regex = new Regex(@"\[{1}[^\]\[]*\]{1}");
         let delims = regex.Matches(str) |> Seq.cast<Match> |> Seq.map (fun m -> m.Value.TrimStart('[').TrimEnd(']')) |> Seq.toArray
-        let delimLength = (2 + (delims |> Seq.map (fun d -> 2 + d.Length) |> Seq.sum) + 1) // 2x char for \\; 2x cn 1x char for \n
+        let delimLength = (2 + (delims |> Seq.map (fun d -> 2 + d.Length) |> Seq.sum) + 1) // 2x char for \\; 2x char for [] foreach delim; 1x char for \n
         (delims, delimLength)
 
     let get_num_data(str : string, delimsLength : int) = 
